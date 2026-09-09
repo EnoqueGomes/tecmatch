@@ -1,0 +1,159 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  CLIENT
+  PROFESSIONAL
+  ADMIN
+}
+
+enum RequestStatus {
+  OPEN
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum ProposalStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  WITHDRAWN
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  name         String
+  phone        String?
+  role         UserRole
+  city         String?
+  state        String?
+  avatarUrl    String?  @map("avatar_url")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  professionalProfile ProfessionalProfile?
+  serviceRequests     ServiceRequest[]     @relation("ClientRequests")
+  proposals           Proposal[]
+  reviewsGiven        Review[]             @relation("ReviewsGiven")
+  reviewsReceived     Review[]             @relation("ReviewsReceived")
+  messages            Message[]
+
+  @@map("users")
+}
+
+model ProfessionalProfile {
+  id              String   @id @default(uuid())
+  userId          String   @unique @map("user_id")
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bio             String?
+  yearsExperience Int?     @map("years_experience")
+  hourlyRate      Decimal? @map("hourly_rate") @db.Decimal(10, 2)
+  serviceRadiusKm Int?     @map("service_radius_km")
+  verified        Boolean  @default(false)
+  avgRating       Decimal  @default(0) @map("avg_rating") @db.Decimal(3, 2)
+  totalReviews    Int      @default(0) @map("total_reviews")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  categories ProfessionalCategory[]
+
+  @@map("professional_profiles")
+}
+
+model Category {
+  id   String @id @default(uuid())
+  name String @unique
+  slug String @unique
+
+  professionals   ProfessionalCategory[]
+  serviceRequests ServiceRequest[]
+
+  @@map("categories")
+}
+
+model ProfessionalCategory {
+  professionalId String @map("professional_id")
+  categoryId     String @map("category_id")
+
+  professional ProfessionalProfile @relation(fields: [professionalId], references: [id], onDelete: Cascade)
+  category     Category            @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@id([professionalId, categoryId])
+  @@map("professional_categories")
+}
+
+model ServiceRequest {
+  id          String        @id @default(uuid())
+  clientId    String        @map("client_id")
+  client      User          @relation("ClientRequests", fields: [clientId], references: [id], onDelete: Cascade)
+  categoryId  String        @map("category_id")
+  category    Category      @relation(fields: [categoryId], references: [id])
+  title       String
+  description String
+  city        String
+  state       String
+  budgetMin   Decimal?      @map("budget_min") @db.Decimal(10, 2)
+  budgetMax   Decimal?      @map("budget_max") @db.Decimal(10, 2)
+  status      RequestStatus @default(OPEN)
+  createdAt   DateTime      @default(now()) @map("created_at")
+  updatedAt   DateTime      @updatedAt @map("updated_at")
+
+  proposals Proposal[]
+  messages  Message[]
+  review    Review?
+
+  @@map("service_requests")
+}
+
+model Proposal {
+  id               String         @id @default(uuid())
+  serviceRequestId String         @map("service_request_id")
+  serviceRequest   ServiceRequest @relation(fields: [serviceRequestId], references: [id], onDelete: Cascade)
+  professionalId   String         @map("professional_id")
+  professional     User           @relation(fields: [professionalId], references: [id], onDelete: Cascade)
+  price            Decimal        @db.Decimal(10, 2)
+  estimatedDays    Int?           @map("estimated_days")
+  message          String
+  status           ProposalStatus @default(PENDING)
+  createdAt        DateTime       @default(now()) @map("created_at")
+  updatedAt        DateTime       @updatedAt @map("updated_at")
+
+  @@unique([serviceRequestId, professionalId])
+  @@map("proposals")
+}
+
+model Review {
+  id               String         @id @default(uuid())
+  serviceRequestId String         @unique @map("service_request_id")
+  serviceRequest   ServiceRequest @relation(fields: [serviceRequestId], references: [id], onDelete: Cascade)
+  reviewerId       String         @map("reviewer_id")
+  reviewer         User           @relation("ReviewsGiven", fields: [reviewerId], references: [id], onDelete: Cascade)
+  revieweeId       String         @map("reviewee_id")
+  reviewee         User           @relation("ReviewsReceived", fields: [revieweeId], references: [id], onDelete: Cascade)
+  rating           Int
+  comment          String?
+  createdAt        DateTime       @default(now()) @map("created_at")
+
+  @@map("reviews")
+}
+
+model Message {
+  id               String         @id @default(uuid())
+  serviceRequestId String         @map("service_request_id")
+  serviceRequest   ServiceRequest @relation(fields: [serviceRequestId], references: [id], onDelete: Cascade)
+  senderId         String         @map("sender_id")
+  sender           User           @relation(fields: [senderId], references: [id], onDelete: Cascade)
+  content          String
+  createdAt        DateTime       @default(now()) @map("created_at")
+
+  @@map("messages")
+}
