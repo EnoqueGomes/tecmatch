@@ -4,8 +4,10 @@ import { getApiErrorMessage } from '@/api/client';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { useAuth } from '@/hooks/useAuth';
+import { useDocumentMeta } from '@/hooks/useDocumentMeta';
 
 export function Login() {
+  useDocumentMeta({ title: 'Entrar' });
   const { login } = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState('');

@@ -3,6 +3,7 @@ import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { listCategories } from '@/api/categories.api';
 import { Button } from '@/components/ui/Button';
+import { useDocumentMeta } from '@/hooks/useDocumentMeta';
 
 const STEPS = [
   {
@@ -20,6 +21,11 @@ const STEPS = [
 ];
 
 export function Landing() {
+  useDocumentMeta({
+    title: 'Profissionais técnicos e engenharia sob medida',
+    description:
+      'Encontre técnicos e engenheiros verificados para o seu projeto, ou receba pedidos de clientes perto de você.',
+  });
   const { data: categories } = useQuery({ queryKey: ['categories'], queryFn: listCategories });
 
   return (

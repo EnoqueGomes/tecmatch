@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Select } from '@/components/ui/Select';
 import { useAuth } from '@/hooks/useAuth';
+import { useDocumentMeta } from '@/hooks/useDocumentMeta';
 import type { UserRole } from '@/types';
 
 const BRAZIL_STATES = [
@@ -15,6 +16,7 @@ const BRAZIL_STATES = [
 type Role = Extract<UserRole, 'CLIENT' | 'PROFESSIONAL'>;
 
 export function Register() {
+  useDocumentMeta({ title: 'Criar conta' });
   const { register } = useAuth();
   const navigate = useNavigate();
   const [form, setForm] = useState({

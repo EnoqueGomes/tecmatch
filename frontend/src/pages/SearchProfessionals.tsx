@@ -8,8 +8,13 @@ import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Select } from '@/components/ui/Select';
 import { Spinner } from '@/components/ui/Spinner';
+import { useDocumentMeta } from '@/hooks/useDocumentMeta';
 
 export function SearchProfessionals() {
+  useDocumentMeta({
+    title: 'Buscar profissionais',
+    description: 'Encontre técnicos e engenheiros verificados perto de você, por categoria e cidade.',
+  });
   const [searchParams, setSearchParams] = useSearchParams();
   const category = searchParams.get('category') ?? '';
   const city = searchParams.get('city') ?? '';

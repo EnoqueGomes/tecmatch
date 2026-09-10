@@ -14,8 +14,10 @@ import { Input } from '@/components/ui/Input';
 import { Spinner } from '@/components/ui/Spinner';
 import { TextArea } from '@/components/ui/TextArea';
 import { useAuth } from '@/hooks/useAuth';
+import { useDocumentMeta } from '@/hooks/useDocumentMeta';
 
 export function Dashboard() {
+  useDocumentMeta({ title: 'Painel' });
   const { user } = useAuth();
   if (!user) return null;
   return user.role === 'PROFESSIONAL' ? <ProfessionalDashboard userId={user.id} /> : <ClientDashboard />;

@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Select } from '@/components/ui/Select';
 import { TextArea } from '@/components/ui/TextArea';
+import { useDocumentMeta } from '@/hooks/useDocumentMeta';
 
 const BRAZIL_STATES = [
   'AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR',
@@ -15,6 +16,7 @@ const BRAZIL_STATES = [
 ];
 
 export function CreateServiceRequest() {
+  useDocumentMeta({ title: 'Publicar um serviço' });
   const navigate = useNavigate();
   const { data: categories } = useQuery({ queryKey: ['categories'], queryFn: listCategories });
   const [form, setForm] = useState({

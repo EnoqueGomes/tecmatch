@@ -9,6 +9,7 @@ import { Card } from '@/components/ui/Card';
 import { Rating } from '@/components/ui/Rating';
 import { Spinner } from '@/components/ui/Spinner';
 import { useAuth } from '@/hooks/useAuth';
+import { useDocumentMeta } from '@/hooks/useDocumentMeta';
 import { formatCurrency, formatDate } from '@/lib/format';
 
 export function ProfessionalProfilePage() {
@@ -23,6 +24,11 @@ export function ProfessionalProfilePage() {
     queryKey: ['reviews', id],
     queryFn: () => listUserReviews(id!),
     enabled: Boolean(id),
+  });
+
+  useDocumentMeta({
+    title: professional ? professional.name : 'Perfil do profissional',
+    description: professional?.bio ?? undefined,
   });
 
   if (isLoading) {

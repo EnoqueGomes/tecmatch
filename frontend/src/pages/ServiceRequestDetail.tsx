@@ -20,6 +20,7 @@ import { Input } from '@/components/ui/Input';
 import { Spinner } from '@/components/ui/Spinner';
 import { TextArea } from '@/components/ui/TextArea';
 import { useAuth } from '@/hooks/useAuth';
+import { useDocumentMeta } from '@/hooks/useDocumentMeta';
 import { formatCurrency, formatDate } from '@/lib/format';
 import { REQUEST_STATUS_LABEL, REQUEST_STATUS_TONE } from '@/lib/status';
 import type { Message } from '@/types';
@@ -34,6 +35,8 @@ export function ServiceRequestDetail() {
     queryFn: () => getServiceRequest(id!),
     enabled: Boolean(id),
   });
+
+  useDocumentMeta({ title: request ? request.title : 'Pedido de serviço' });
 
   const isOwner = Boolean(user && request && user.id === request.clientId);
   const isProfessional = user?.role === 'PROFESSIONAL';
