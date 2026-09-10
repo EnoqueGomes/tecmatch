@@ -1,5 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
+import { Logo } from '../ui/Logo';
 import { Button } from '../ui/Button';
 
 export function Navbar() {
@@ -14,8 +15,8 @@ export function Navbar() {
   return (
     <header className="border-b-2 border-ink/10 bg-paper">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link to="/" className="font-display text-xl font-semibold tracking-tight text-ink">
-          TecMatch
+        <Link to="/">
+          <Logo />
         </Link>
         <nav className="flex items-center gap-6">
           <Link to="/buscar" className="text-sm font-medium text-ink hover:text-blueprint">
