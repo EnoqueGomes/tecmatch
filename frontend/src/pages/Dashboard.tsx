@@ -1,4 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { ShieldCheck } from 'lucide-react';
 import { useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { listCategories } from '@/api/categories.api';
@@ -15,6 +16,7 @@ import { Spinner } from '@/components/ui/Spinner';
 import { TextArea } from '@/components/ui/TextArea';
 import { useAuth } from '@/hooks/useAuth';
 import { useDocumentMeta } from '@/hooks/useDocumentMeta';
+import type { ProfessionalSummary } from '@/types';
 
 export function Dashboard() {
   useDocumentMeta({ title: 'Painel' });
@@ -76,13 +78,11 @@ function ProfessionalDashboard({ userId }: { userId: string }) {
     enabled: tab === 'mine',
   });
 
-  const needsProfile = profile && profile.categories.length === 0;
-
   return (
     <div className="mx-auto max-w-6xl px-6 py-12">
       <h1 className="font-display text-3xl font-semibold text-ink">Painel do profissional</h1>
 
-      {needsProfile && <ProfileSetupCard userId={userId} />}
+      {profile && <ProfileEditCard key={profile.id} userId={userId} profile={profile} />}
 
       <div className="mt-8 flex gap-2 border-b-2 border-ink/10">
         <TabButton active={tab === 'open'} onClick={() => setTab('open')}>
@@ -143,17 +143,22 @@ function TabButton({ active, onClick, children }: { active: boolean; onClick: ()
   );
 }
 
-function ProfileSetupCard({ userId }: { userId: string }) {
+function ProfileEditCard({ userId, profile }: { userId: string; profile: ProfessionalSummary }) {
   const queryClient = useQueryClient();
   const { data: categories } = useQuery({ queryKey: ['categories'], queryFn: listCategories });
-  const [bio, setBio] = useState('');
-  const [hourlyRate, setHourlyRate] = useState('');
-  const [selected, setSelected] = useState<string[]>([]);
+  const [bio, setBio] = useState(profile.bio ?? '');
+  const [hourlyRate, setHourlyRate] = useState(profile.hourlyRate ?? '');
+  const [creaNumber, setCreaNumber] = useState(profile.creaNumber ?? '');
+  const [selected, setSelected] = useState<string[]>(profile.categories.map((category) => category.id));
   const [error, setError] = useState<string | null>(null);
+  const [saved, setSaved] = useState(false);
+
+  const isFirstSetup = profile.categories.length === 0;
 
   const mutation = useMutation({
     mutationFn: upsertProfile,
     onSuccess: () => {
+      setSaved(true);
       queryClient.invalidateQueries({ queryKey: ['professional', userId] });
     },
     onError: (err) => setError(getApiErrorMessage(err, 'Não foi possível salvar o perfil.')),
@@ -165,6 +170,7 @@ function ProfileSetupCard({ userId }: { userId: string }) {
 
   function handleSubmit() {
     setError(null);
+    setSaved(false);
     if (selected.length === 0) {
       setError('Escolha ao menos uma área de atuação.');
       return;
@@ -172,16 +178,31 @@ function ProfileSetupCard({ userId }: { userId: string }) {
     mutation.mutate({
       bio: bio || undefined,
       hourlyRate: hourlyRate ? Number(hourlyRate) : undefined,
+      creaNumber: creaNumber || undefined,
       categoryIds: selected,
     });
   }
 
   return (
-    <Card className="mt-6 border-signal/40 bg-signal/5">
-      <h2 className="font-display text-lg font-semibold text-ink">Complete seu perfil</h2>
+    <Card className={`mt-6 ${isFirstSetup ? 'border-signal/40 bg-signal/5' : ''}`}>
+      <h2 className="font-display text-lg font-semibold text-ink">
+        {isFirstSetup ? 'Complete seu perfil' : 'Editar perfil'}
+      </h2>
       <p className="mt-1 text-sm text-ink/70">
-        Escolha suas áreas de atuação para começar a aparecer nas buscas e nos pedidos em aberto.
+        Escolha suas áreas de atuação para aparecer nas buscas e nos pedidos em aberto.
       </p>
+
+      {profile.verified ? (
+        <div className="mt-3 flex items-center gap-1.5 text-sm text-moss">
+          <ShieldCheck size={16} />
+          Perfil verificado
+        </div>
+      ) : profile.creaNumber ? (
+        <p className="mt-3 text-sm text-signal-dark">
+          Registro Crea enviado — aguardando verificação da nossa equipe.
+        </p>
+      ) : null}
+
       <div className="mt-4 flex flex-wrap gap-2">
         {categories?.map((category) => (
           <button
@@ -204,11 +225,19 @@ function ProfileSetupCard({ userId }: { userId: string }) {
           value={hourlyRate}
           onChange={(e) => setHourlyRate(e.target.value)}
         />
+        <Input
+          label="Número de registro no Crea"
+          placeholder="Ex: 123456789-PR"
+          hint="Usado só pra conferir seu registro — não altera enquanto estiver em análise."
+          value={creaNumber}
+          onChange={(e) => setCreaNumber(e.target.value)}
+        />
       </div>
       <div className="mt-3">
         <TextArea label="Sobre você (opcional)" rows={3} value={bio} onChange={(e) => setBio(e.target.value)} />
       </div>
       {error && <p className="mt-2 text-sm text-red-700">{error}</p>}
+      {saved && !error && <p className="mt-2 text-sm text-moss">Perfil salvo.</p>}
       <Button className="mt-4" onClick={handleSubmit} isLoading={mutation.isPending}>
         Salvar perfil
       </Button>

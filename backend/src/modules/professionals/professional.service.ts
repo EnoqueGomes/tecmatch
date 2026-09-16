@@ -20,6 +20,7 @@ function toPublicProfessional(profile: ProfileWithRelations) {
     yearsExperience: profile.yearsExperience,
     hourlyRate: profile.hourlyRate,
     serviceRadiusKm: profile.serviceRadiusKm,
+    creaNumber: profile.creaNumber,
     verified: profile.verified,
     avgRating: profile.avgRating,
     totalReviews: profile.totalReviews,

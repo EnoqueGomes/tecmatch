@@ -13,6 +13,7 @@ export const upsertProfileSchema = z.object({
   yearsExperience: z.coerce.number().int().min(0).max(60).optional(),
   hourlyRate: z.coerce.number().min(0).optional(),
   serviceRadiusKm: z.coerce.number().int().min(0).max(500).optional(),
+  creaNumber: z.string().max(30).optional(),
   categoryIds: z.array(z.string().uuid()).min(1).max(10).optional(),
 });
 

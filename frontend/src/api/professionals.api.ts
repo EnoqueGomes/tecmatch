@@ -24,6 +24,7 @@ export interface UpsertProfilePayload {
   yearsExperience?: number;
   hourlyRate?: number;
   serviceRadiusKm?: number;
+  creaNumber?: string;
   categoryIds?: string[];
 }
 

@@ -54,6 +54,9 @@ export function ProfessionalProfilePage() {
             <h1 className="font-display text-3xl font-semibold text-ink">{professional.name}</h1>
             {professional.verified && <ShieldCheck size={22} className="text-moss" />}
           </div>
+          {professional.verified && professional.creaNumber && (
+            <p className="mt-1 font-mono text-sm text-moss">Crea {professional.creaNumber}</p>
+          )}
           {(professional.city || professional.state) && (
             <div className="mt-2 flex items-center gap-1.5 text-ink/60">
               <MapPin size={16} />

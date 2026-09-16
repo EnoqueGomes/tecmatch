@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import { Admin } from './pages/Admin';
 import { Footer } from './components/layout/Footer';
 import { Navbar } from './components/layout/Navbar';
 import { ProtectedRoute } from './components/layout/ProtectedRoute';
@@ -44,6 +45,14 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <ServiceRequestDetail />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute role="ADMIN">
+                <Admin />
               </ProtectedRoute>
             }
           />

@@ -35,6 +35,7 @@ export interface ProfessionalSummary extends UserSummary {
   yearsExperience?: number | null;
   hourlyRate?: string | null;
   serviceRadiusKm?: number | null;
+  creaNumber?: string | null;
   verified: boolean;
   avgRating: string;
   totalReviews: number;

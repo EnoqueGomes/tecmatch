@@ -27,6 +27,11 @@ export function Navbar() {
               <Link to="/dashboard" className="text-sm font-medium text-ink hover:text-blueprint">
                 Painel
               </Link>
+              {user.role === 'ADMIN' && (
+                <Link to="/admin" className="text-sm font-medium text-ink hover:text-blueprint">
+                  Verificações
+                </Link>
+              )}
               <span className="hidden text-sm text-ink/60 sm:inline">Olá, {user.name.split(' ')[0]}</span>
               <Button variant="ghost" size="sm" onClick={handleLogout}>
                 Sair

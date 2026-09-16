@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import { env } from './config/env';
 import { errorMiddleware, notFoundMiddleware } from './middlewares/error.middleware';
+import adminRoutes from './modules/admin/admin.routes';
 import authRoutes from './modules/auth/auth.routes';
 import categoryRoutes from './modules/categories/category.routes';
 import messageRoutes from './modules/messages/message.routes';
@@ -16,7 +17,7 @@ import userRoutes from './modules/users/user.routes';
 export const app = express();
 
 app.use(helmet());
-app.use(cors({ origin: env.corsOrigin, credentials: true }));
+app.use(cors({ origin: env.corsOrigins, credentials: true }));
 app.use(express.json());
 if (!env.isProduction) {
   app.use(morgan('dev'));
@@ -28,6 +29,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/professionals', professionalRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Rotas aninhadas sob um pedido de serviço específico — montadas antes da
 // rota geral para deixar explícito que são mais específicas.
