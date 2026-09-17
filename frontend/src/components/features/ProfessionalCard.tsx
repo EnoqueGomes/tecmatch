@@ -1,4 +1,4 @@
-import { MapPin, ShieldCheck } from 'lucide-react';
+import { MapPin, ShieldCheck, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { formatCurrency } from '@/lib/format';
 import type { ProfessionalSummary } from '@/types';
@@ -10,14 +10,25 @@ export function ProfessionalCard({ professional }: { professional: ProfessionalS
   const hourlyRate = formatCurrency(professional.hourlyRate);
   return (
     <Link to={`/profissionais/${professional.id}`}>
-      <Card className="flex h-full flex-col gap-3 transition-colors hover:border-ink/30">
+      <Card
+        className={`flex h-full flex-col gap-3 transition-colors hover:border-ink/30 ${
+          professional.isFeatured ? 'border-signal/40' : ''
+        }`}
+      >
         <div className="flex items-start justify-between gap-2">
           <h3 className="font-display text-lg font-semibold text-ink">{professional.name}</h3>
-          {professional.verified && (
-            <span title="Perfil verificado">
-              <ShieldCheck size={18} className="text-moss" />
-            </span>
-          )}
+          <div className="flex items-center gap-1.5">
+            {professional.isFeatured && (
+              <span title="Perfil em destaque">
+                <Star size={16} className="fill-signal text-signal" />
+              </span>
+            )}
+            {professional.verified && (
+              <span title="Perfil verificado">
+                <ShieldCheck size={18} className="text-moss" />
+              </span>
+            )}
+          </div>
         </div>
         {(professional.city || professional.state) && (
           <div className="flex items-center gap-1.5 text-sm text-ink/60">

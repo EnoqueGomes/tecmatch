@@ -19,4 +19,10 @@ export const env = {
     .map((origin) => origin.trim())
     .filter(Boolean),
   isProduction: process.env.NODE_ENV === 'production',
+  // Opcionais: a cobrança por assinatura fica desativada (com erro claro)
+  // até essas três variáveis serem configuradas — o servidor não trava por isso.
+  stripeSecretKey: process.env.STRIPE_SECRET_KEY,
+  stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET,
+  stripePriceId: process.env.STRIPE_PRICE_ID,
+  frontendUrl: process.env.FRONTEND_URL ?? 'https://tecmatch.com.br',
 };

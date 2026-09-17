@@ -1,7 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { ShieldCheck } from 'lucide-react';
+import { ShieldCheck, Star } from 'lucide-react';
 import { useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
+import { createCheckoutSession, createPortalSession } from '@/api/billing.api';
 import { listCategories } from '@/api/categories.api';
 import { getApiErrorMessage } from '@/api/client';
 import { getProfessional, upsertProfile } from '@/api/professionals.api';
@@ -83,6 +84,7 @@ function ProfessionalDashboard({ userId }: { userId: string }) {
       <h1 className="font-display text-3xl font-semibold text-ink">Painel do profissional</h1>
 
       {profile && <ProfileEditCard key={profile.id} userId={userId} profile={profile} />}
+      {profile && <SubscriptionCard profile={profile} />}
 
       <div className="mt-8 flex gap-2 border-b-2 border-ink/10">
         <TabButton active={tab === 'open'} onClick={() => setTab('open')}>
@@ -241,6 +243,62 @@ function ProfileEditCard({ userId, profile }: { userId: string; profile: Profess
       <Button className="mt-4" onClick={handleSubmit} isLoading={mutation.isPending}>
         Salvar perfil
       </Button>
+    </Card>
+  );
+}
+
+function SubscriptionCard({ profile }: { profile: ProfessionalSummary }) {
+  const [error, setError] = useState<string | null>(null);
+
+  const checkoutMutation = useMutation({
+    mutationFn: createCheckoutSession,
+    onSuccess: ({ url }) => {
+      window.location.href = url;
+    },
+    onError: (err) => setError(getApiErrorMessage(err, 'Não foi possível iniciar a assinatura.')),
+  });
+
+  const portalMutation = useMutation({
+    mutationFn: createPortalSession,
+    onSuccess: ({ url }) => {
+      window.location.href = url;
+    },
+    onError: (err) => setError(getApiErrorMessage(err, 'Não foi possível abrir o gerenciamento da assinatura.')),
+  });
+
+  const isActive = profile.isFeatured;
+
+  return (
+    <Card className="mt-6">
+      <div className="flex items-center gap-2">
+        <Star size={18} className={isActive ? 'fill-signal text-signal' : 'text-ink/40'} />
+        <h2 className="font-display text-lg font-semibold text-ink">Destaque no site</h2>
+      </div>
+      {isActive ? (
+        <>
+          <p className="mt-2 text-sm text-ink/70">
+            Sua assinatura está ativa — seu perfil aparece com prioridade nas buscas.
+          </p>
+          <Button
+            variant="secondary"
+            className="mt-4"
+            onClick={() => portalMutation.mutate()}
+            isLoading={portalMutation.isPending}
+          >
+            Gerenciar assinatura
+          </Button>
+        </>
+      ) : (
+        <>
+          <p className="mt-2 text-sm text-ink/70">
+            Assine pra aparecer com prioridade nas buscas e ganhar um selo de destaque no seu perfil.
+          </p>
+          <Button className="mt-4" onClick={() => checkoutMutation.mutate()} isLoading={checkoutMutation.isPending}>
+            Assinar destaque
+          </Button>
+        </>
+      )}
+      {error && <p className="mt-2 text-sm text-red-700">{error}</p>}
     </Card>
   );
 }

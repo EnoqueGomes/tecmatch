@@ -22,6 +22,8 @@ function toPublicProfessional(profile: ProfileWithRelations) {
     serviceRadiusKm: profile.serviceRadiusKm,
     creaNumber: profile.creaNumber,
     verified: profile.verified,
+    isFeatured: profile.isFeatured,
+    subscriptionStatus: profile.subscriptionStatus,
     avgRating: profile.avgRating,
     totalReviews: profile.totalReviews,
     categories: profile.categories.map((pc) => pc.category),
@@ -41,7 +43,7 @@ export async function search(query: SearchProfessionalsQuery) {
     prisma.professionalProfile.findMany({
       where,
       include: { user: true, categories: { include: { category: true } } },
-      orderBy: { avgRating: 'desc' },
+      orderBy: [{ isFeatured: 'desc' }, { avgRating: 'desc' }],
       skip: (page - 1) * pageSize,
       take: pageSize,
     }),

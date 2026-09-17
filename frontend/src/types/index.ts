@@ -37,6 +37,8 @@ export interface ProfessionalSummary extends UserSummary {
   serviceRadiusKm?: number | null;
   creaNumber?: string | null;
   verified: boolean;
+  isFeatured: boolean;
+  subscriptionStatus: 'NONE' | 'ACTIVE' | 'PAST_DUE' | 'CANCELED';
   avgRating: string;
   totalReviews: number;
   categories: Category[];

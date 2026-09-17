@@ -27,6 +27,13 @@ enum ProposalStatus {
   WITHDRAWN
 }
 
+enum SubscriptionStatus {
+  NONE
+  ACTIVE
+  PAST_DUE
+  CANCELED
+}
+
 model User {
   id           String   @id @default(uuid())
   email        String   @unique
@@ -60,6 +67,11 @@ model ProfessionalProfile {
   serviceRadiusKm Int?     @map("service_radius_km")
   creaNumber      String?  @map("crea_number")
   verified        Boolean  @default(false)
+  isFeatured                   Boolean            @default(false) @map("is_featured")
+  subscriptionStatus           SubscriptionStatus @default(NONE) @map("subscription_status")
+  stripeCustomerId             String?            @unique @map("stripe_customer_id")
+  stripeSubscriptionId         String?            @unique @map("stripe_subscription_id")
+  subscriptionCurrentPeriodEnd DateTime?          @map("subscription_current_period_end")
   avgRating       Decimal  @default(0) @map("avg_rating") @db.Decimal(3, 2)
   totalReviews    Int      @default(0) @map("total_reviews")
   createdAt       DateTime @default(now()) @map("created_at")
