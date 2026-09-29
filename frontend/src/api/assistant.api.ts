@@ -14,3 +14,8 @@ export async function sendChat(messages: ChatMessage[]) {
   const { data } = await apiClient.post<ChatResponse>('/assistant/chat', { messages });
   return data;
 }
+
+export async function getAssistantStatus() {
+  const { data } = await apiClient.get<{ aiEnabled: boolean }>('/assistant/status');
+  return data;
+}

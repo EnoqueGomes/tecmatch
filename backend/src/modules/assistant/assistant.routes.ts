@@ -1,4 +1,5 @@
 import { Router, type NextFunction, type Request, type Response } from 'express';
+import { env } from '../../config/env';
 import { validate } from '../../middlewares/validate.middleware';
 import { AppError } from '../../utils/AppError';
 import { asyncHandler } from '../../utils/asyncHandler';
@@ -28,6 +29,13 @@ function rateLimit(req: Request, _res: Response, next: NextFunction) {
 }
 
 const router = Router();
+
+// Diz ao site qual modo usar: com a chave da IA configurada no Render, o balão
+// conversa com a IA; sem ela, usa o atendimento guiado (gratuito).
+router.get('/status', (_req, res) => {
+  res.json({ aiEnabled: Boolean(env.anthropicApiKey) });
+});
+
 router.post('/chat', rateLimit, validate(chatSchema), asyncHandler(chatController));
 
 export default router;
