@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { Admin } from './pages/Admin';
+import { ChatWidget } from './components/features/ChatWidget';
 import { Footer } from './components/layout/Footer';
 import { Navbar } from './components/layout/Navbar';
 import { ProtectedRoute } from './components/layout/ProtectedRoute';
@@ -62,6 +63,7 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
+      <ChatWidget />
     </div>
   );
 }

@@ -25,4 +25,7 @@ export const env = {
   stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET,
   stripePriceId: process.env.STRIPE_PRICE_ID,
   frontendUrl: process.env.FRONTEND_URL ?? 'https://tecmatch.com.br',
+  // Opcional: sem essa chave, o assistente de IA responde 503 e o site
+  // oferece o WhatsApp direto — nada mais quebra.
+  anthropicApiKey: process.env.ANTHROPIC_API_KEY,
 };

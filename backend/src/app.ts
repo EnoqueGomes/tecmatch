@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import { env } from './config/env';
 import { errorMiddleware, notFoundMiddleware } from './middlewares/error.middleware';
 import adminRoutes from './modules/admin/admin.routes';
+import assistantRoutes from './modules/assistant/assistant.routes';
 import authRoutes from './modules/auth/auth.routes';
 import billingRoutes from './modules/billing/billing.routes';
 import { webhookController } from './modules/billing/billing.controller';
@@ -18,6 +19,10 @@ import serviceRequestRoutes from './modules/service-requests/service-request.rou
 import userRoutes from './modules/users/user.routes';
 
 export const app = express();
+
+// O Render fica atrás de um proxy: sem isso, req.ip seria sempre o IP do proxy
+// e o limite de mensagens do assistente valeria pra todo mundo junto.
+app.set('trust proxy', 1);
 
 app.use(helmet());
 app.use(cors({ origin: env.corsOrigins, credentials: true }));
@@ -40,6 +45,7 @@ app.use('/api/professionals', professionalRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/billing', billingRoutes);
 app.use('/api/leads', leadRoutes);
+app.use('/api/assistant', assistantRoutes);
 
 // Rotas aninhadas sob um pedido de serviço específico — montadas antes da
 // rota geral para deixar explícito que são mais específicas.
