@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { listCategories } from '@/api/categories.api';
 import { Button } from '@/components/ui/Button';
 import { useDocumentMeta } from '@/hooks/useDocumentMeta';
+import { useJsonLd } from '@/hooks/useJsonLd';
 
 const STEPS = [
   {
@@ -20,6 +21,29 @@ const STEPS = [
   },
 ];
 
+const FAQ_ITEMS = [
+  {
+    question: 'O que é a TecMatch?',
+    answer:
+      'A TecMatch é um marketplace que conecta empresas e pessoas a profissionais técnicos e engenheiros verificados no Crea, em Curitiba e no Paraná. Cobre áreas como elétrica, hidráulica, construção civil, mecânica, automação industrial e mais.',
+  },
+  {
+    question: 'Os profissionais da TecMatch são verificados de verdade?',
+    answer:
+      'Sim. Cada profissional informa o número de registro no Crea, e a equipe da TecMatch confere esse registro na consulta pública do Confea antes de liberar o selo de verificado no perfil.',
+  },
+  {
+    question: 'Como funciona o pagamento pelo serviço?',
+    answer:
+      'O valor e a forma de pagamento são combinados diretamente entre cliente e profissional, depois que uma proposta é aceita. A TecMatch conecta as partes e verifica o registro profissional, sem intermediar o pagamento no plano atual.',
+  },
+  {
+    question: 'Minha empresa pode contratar a TecMatch diretamente, sem escolher entre propostas?',
+    answer:
+      'Sim — esse é o TecMatch Gerenciado: sua empresa contrata a TecMatch diretamente, e a TecMatch seleciona e acompanha o profissional técnico certo para o projeto, do início à entrega.',
+  },
+];
+
 export function Landing() {
   useDocumentMeta({
     title: 'Profissionais técnicos e engenharia sob medida',
@@ -27,6 +51,16 @@ export function Landing() {
       'Encontre técnicos e engenheiros verificados para o seu projeto, ou receba pedidos de clientes perto de você.',
   });
   const { data: categories } = useQuery({ queryKey: ['categories'], queryFn: listCategories });
+
+  useJsonLd({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: FAQ_ITEMS.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: { '@type': 'Answer', text: item.answer },
+    })),
+  });
 
   return (
     <div>
@@ -85,6 +119,42 @@ export function Landing() {
               <span className="font-mono text-sm text-ink/40">{String(index + 1).padStart(2, '0')}</span>
               <h3 className="mt-2 font-display text-lg font-semibold text-ink">{step.title}</h3>
               <p className="mt-2 text-sm text-ink/70">{step.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="border-y-2 border-ink/10 bg-white py-16">
+        <div className="mx-auto grid max-w-6xl items-center gap-8 px-6 md:grid-cols-2">
+          <div>
+            <span className="inline-flex items-center rounded border-2 border-signal/40 bg-signal/5 px-3 py-1 text-sm font-medium text-signal-dark">
+              TecMatch Gerenciado
+            </span>
+            <h2 className="mt-4 font-display text-2xl font-semibold text-ink">
+              Prefere não comparar propostas? Contrate a TecMatch diretamente.
+            </h2>
+            <p className="mt-3 max-w-lg text-ink/70">
+              A TecMatch seleciona e acompanha o profissional técnico certo para o seu projeto, do início à
+              entrega — um único ponto de contato para sua empresa.
+            </p>
+          </div>
+          <div className="md:text-right">
+            <Link to="/servico-gerenciado">
+              <Button variant="secondary" size="md">
+                Conhecer o TecMatch Gerenciado
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 py-16">
+        <h2 className="font-display text-2xl font-semibold text-ink">Perguntas frequentes</h2>
+        <div className="mt-8 grid gap-8 md:grid-cols-2">
+          {FAQ_ITEMS.map((item) => (
+            <div key={item.question}>
+              <h3 className="font-display text-lg font-semibold text-ink">{item.question}</h3>
+              <p className="mt-2 text-sm text-ink/70">{item.answer}</p>
             </div>
           ))}
         </div>

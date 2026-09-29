@@ -22,6 +22,9 @@ export function Navbar() {
           <Link to="/buscar" className="text-sm font-medium text-ink hover:text-blueprint">
             Buscar profissionais
           </Link>
+          <Link to="/servico-gerenciado" className="text-sm font-medium text-ink hover:text-blueprint">
+            TecMatch Gerenciado
+          </Link>
           {user ? (
             <>
               <Link to="/dashboard" className="text-sm font-medium text-ink hover:text-blueprint">

@@ -1,0 +1,33 @@
+# TecMatch
+
+> Marketplace que conecta empresas e pessoas a profissionais técnicos e de
+> engenharia verificados no registro do Crea, em Curitiba e no Paraná, Brasil.
+
+TecMatch atua em duas frentes:
+
+1. Marketplace: o cliente publica um pedido de serviço, recebe propostas de
+   profissionais verificados e escolhe com quem fechar. Áreas atendidas:
+   elétrica, hidráulica, construção civil, mecânica, refrigeração e
+   climatização, automação industrial, TI e redes, topografia, segurança do
+   trabalho, projetos estruturais e manutenção industrial.
+2. TecMatch Gerenciado: a empresa contrata a TecMatch diretamente, e a
+   TecMatch seleciona e acompanha o profissional técnico certo para o
+   projeto, do início à entrega, com um único ponto de contato.
+
+Todo profissional cadastrado como verificado teve o número de registro no
+Crea conferido pela equipe da TecMatch na consulta pública do Confea antes
+de receber o selo.
+
+## Páginas principais
+
+- [Página inicial](https://tecmatch.com.br/): visão geral, como funciona e
+  perguntas frequentes sobre a TecMatch.
+- [TecMatch Gerenciado](https://tecmatch.com.br/servico-gerenciado):
+  explicação do serviço gerenciado e como uma empresa entra em contato.
+- [Buscar profissionais](https://tecmatch.com.br/buscar): lista pública de
+  profissionais verificados, filtrável por categoria e cidade.
+
+## Contato
+
+Empresas interessadas no TecMatch Gerenciado podem preencher o formulário em
+https://tecmatch.com.br/servico-gerenciado#contato.

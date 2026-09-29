@@ -7,6 +7,7 @@ import { CreateServiceRequest } from './pages/CreateServiceRequest';
 import { Dashboard } from './pages/Dashboard';
 import { Landing } from './pages/Landing';
 import { Login } from './pages/Login';
+import { ManagedService } from './pages/ManagedService';
 import { NotFound } from './pages/NotFound';
 import { ProfessionalProfilePage } from './pages/ProfessionalProfilePage';
 import { Register } from './pages/Register';
@@ -23,6 +24,7 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/registro" element={<Register />} />
           <Route path="/buscar" element={<SearchProfessionals />} />
+          <Route path="/servico-gerenciado" element={<ManagedService />} />
           <Route path="/profissionais/:id" element={<ProfessionalProfilePage />} />
           <Route
             path="/dashboard"
