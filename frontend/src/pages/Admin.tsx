@@ -72,8 +72,8 @@ function VerificationsPanel() {
   return (
     <>
       <p className="text-ink/60">
-        Profissionais que informaram o número de registro no Crea e aguardam confirmação. Confira o
-        registro na consulta pública do Confea antes de aprovar.
+        Profissionais que informaram o número de registro e aguardam confirmação. Confira no conselho
+        certo antes de aprovar: engenheiros no Crea/Confea, técnicos industriais no CFT/CRT.
       </p>
 
       <div className="mt-6">
@@ -93,7 +93,7 @@ function VerificationsPanel() {
                       {[professional.city, professional.state].filter(Boolean).join(' - ')}
                     </p>
                   )}
-                  <p className="mt-1 font-mono text-sm text-ink">Crea: {professional.creaNumber}</p>
+                  <p className="mt-1 font-mono text-sm text-ink">Registro: {professional.creaNumber}</p>
                   <div className="mt-2 flex flex-wrap gap-1.5">
                     {professional.categories.map((category) => (
                       <Badge key={category.id} tone="info">
@@ -106,7 +106,12 @@ function VerificationsPanel() {
                 <div className="flex shrink-0 gap-2">
                   <a href="https://consultaprofissional.confea.org.br/" target="_blank" rel="noreferrer">
                     <Button variant="secondary" size="sm">
-                      Verificar no Confea
+                      Consultar no Confea
+                    </Button>
+                  </a>
+                  <a href="https://www.cft.org.br/" target="_blank" rel="noreferrer">
+                    <Button variant="secondary" size="sm">
+                      Consultar no CFT/CRT
                     </Button>
                   </a>
                   <Button

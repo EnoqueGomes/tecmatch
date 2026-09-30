@@ -55,7 +55,7 @@ export function ProfessionalProfilePage() {
             {professional.verified && <ShieldCheck size={22} className="text-moss" />}
           </div>
           {professional.verified && professional.creaNumber && (
-            <p className="mt-1 font-mono text-sm text-moss">Crea {professional.creaNumber}</p>
+            <p className="mt-1 font-mono text-sm text-moss">Registro {professional.creaNumber}</p>
           )}
           {(professional.city || professional.state) && (
             <div className="mt-2 flex items-center gap-1.5 text-ink/60">

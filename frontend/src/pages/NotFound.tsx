@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/Button';
 import { useDocumentMeta } from '@/hooks/useDocumentMeta';
 
 export function NotFound() {
-  useDocumentMeta({ title: 'Página não encontrada' });
+  useDocumentMeta({ title: 'Página não encontrada', noindex: true });
   return (
     <div className="mx-auto flex max-w-md flex-col items-center px-6 py-24 text-center">
       <span className="font-mono text-sm text-ink/40">Erro 404</span>

@@ -1,10 +1,11 @@
-import { useQuery } from '@tanstack/react-query';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, BadgeCheck, CheckCircle2, FileText, MapPin, Search, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { listCategories } from '@/api/categories.api';
 import { Button } from '@/components/ui/Button';
+import { CATEGORIES } from '@/content/categories';
+import { HOME_FAQ } from '@/content/faq';
+import { GUIDES } from '@/content/guides';
+import { META } from '@/content/meta';
 import { useDocumentMeta } from '@/hooks/useDocumentMeta';
-import { useJsonLd } from '@/hooks/useJsonLd';
 
 const STEPS = [
   {
@@ -21,58 +22,33 @@ const STEPS = [
   },
 ];
 
-const FAQ_ITEMS = [
-  {
-    question: 'O que é a TecMatch?',
-    answer:
-      'A TecMatch é um marketplace que conecta empresas e pessoas a profissionais técnicos e engenheiros verificados no Crea, em Curitiba e no Paraná. Cobre áreas como elétrica, hidráulica, construção civil, mecânica, automação industrial e mais.',
-  },
-  {
-    question: 'Os profissionais da TecMatch são verificados de verdade?',
-    answer:
-      'Sim. Cada profissional informa o número de registro no Crea, e a equipe da TecMatch confere esse registro na consulta pública do Confea antes de liberar o selo de verificado no perfil.',
-  },
-  {
-    question: 'Como funciona o pagamento pelo serviço?',
-    answer:
-      'O valor e a forma de pagamento são combinados diretamente entre cliente e profissional, depois que uma proposta é aceita. A TecMatch conecta as partes e verifica o registro profissional, sem intermediar o pagamento no plano atual.',
-  },
-  {
-    question: 'Minha empresa pode contratar a TecMatch diretamente, sem escolher entre propostas?',
-    answer:
-      'Sim — esse é o TecMatch Gerenciado: sua empresa contrata a TecMatch diretamente, e a TecMatch seleciona e acompanha o profissional técnico certo para o projeto, do início à entrega.',
-  },
+const TRUST = [
+  { icon: ShieldCheck, text: 'Registro profissional conferido pela nossa equipe' },
+  { icon: CheckCircle2, text: 'Publicar um pedido é gratuito' },
+  { icon: MapPin, text: 'Curitiba e todo o Paraná' },
+];
+
+const VERIFICATION_STEPS = [
+  { icon: FileText, text: 'O profissional informa o número do registro no Crea (engenheiros) ou no CRT (técnicos).' },
+  { icon: Search, text: 'Nossa equipe confere o número na consulta pública do conselho.' },
+  { icon: BadgeCheck, text: 'Só então o perfil recebe o selo de verificado.' },
 ];
 
 export function Landing() {
-  useDocumentMeta({
-    title: 'Profissionais técnicos e engenharia sob medida',
-    description:
-      'Encontre técnicos e engenheiros verificados para o seu projeto, ou receba pedidos de clientes perto de você.',
-  });
-  const { data: categories } = useQuery({ queryKey: ['categories'], queryFn: listCategories });
-
-  useJsonLd({
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: FAQ_ITEMS.map((item) => ({
-      '@type': 'Question',
-      name: item.question,
-      acceptedAnswer: { '@type': 'Answer', text: item.answer },
-    })),
-  });
+  useDocumentMeta(META.home);
+  const featuredGuides = GUIDES.slice(0, 3);
 
   return (
     <div>
-      <section className="mx-auto max-w-6xl px-6 py-20">
+      <section className="mx-auto max-w-6xl px-6 py-16 md:py-20">
         <div className="grid items-center gap-12 md:grid-cols-2">
           <div>
             <h1 className="font-display text-4xl font-semibold leading-tight text-ink md:text-5xl">
               O profissional técnico certo para o seu projeto, sem depender de indicação.
             </h1>
             <p className="mt-5 max-w-md text-lg text-ink/70">
-              Publique o serviço que você precisa e receba propostas de eletricistas, engenheiros e
-              técnicos verificados perto de você.
+              Publique o serviço que você precisa e receba propostas de engenheiros e técnicos com registro
+              profissional conferido, em Curitiba e em todo o Paraná.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link to="/registro">
@@ -87,29 +63,54 @@ export function Landing() {
                 </Button>
               </Link>
             </div>
+            <ul className="mt-8 flex flex-col gap-2.5">
+              {TRUST.map(({ icon: Icon, text }) => (
+                <li key={text} className="flex items-center gap-2.5 text-sm text-ink/70">
+                  <Icon size={16} className="shrink-0 text-moss" aria-hidden="true" />
+                  {text}
+                </li>
+              ))}
+            </ul>
           </div>
-          <BlueprintMark />
+
+          <aside aria-label="Como funciona a verificação" className="rounded border-2 border-ink/15 bg-white p-6">
+            <p className="font-mono text-xs uppercase tracking-wide text-ink/40">Como o selo é concedido</p>
+            <ol className="mt-5 flex flex-col gap-5">
+              {VERIFICATION_STEPS.map(({ icon: Icon, text }, index) => (
+                <li key={text} className="flex items-start gap-4">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded bg-ink text-paper">
+                    <Icon size={18} aria-hidden="true" />
+                  </span>
+                  <div>
+                    <span className="font-mono text-xs text-ink/40">{String(index + 1).padStart(2, '0')}</span>
+                    <p className="text-sm text-ink">{text}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <p className="mt-6 border-t-2 border-ink/10 pt-4 text-xs text-ink/50">
+              Perfis sem selo ainda não tiveram o registro conferido.
+            </p>
+          </aside>
         </div>
       </section>
 
-      {categories && categories.length > 0 && (
-        <section className="border-y-2 border-ink/10 bg-white py-14">
-          <div className="mx-auto max-w-6xl px-6">
-            <h2 className="font-display text-2xl font-semibold text-ink">Áreas atendidas</h2>
-            <div className="mt-6 flex flex-wrap gap-2">
-              {categories.map((category) => (
-                <Link
-                  key={category.id}
-                  to={`/buscar?category=${category.slug}`}
-                  className="rounded border-2 border-line px-3 py-1.5 text-sm text-ink transition-colors hover:border-ink"
-                >
-                  {category.name}
-                </Link>
-              ))}
-            </div>
+      <section className="border-y-2 border-ink/10 bg-white py-14">
+        <div className="mx-auto max-w-6xl px-6">
+          <h2 className="font-display text-2xl font-semibold text-ink">Áreas atendidas</h2>
+          <div className="mt-6 flex flex-wrap gap-2">
+            {CATEGORIES.map((category) => (
+              <Link
+                key={category.slug}
+                to={`/buscar?category=${category.slug}`}
+                className="rounded border-2 border-line px-3 py-1.5 text-sm text-ink transition-colors hover:border-ink"
+              >
+                {category.name}
+              </Link>
+            ))}
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
       <section className="mx-auto max-w-6xl px-6 py-16">
         <h2 className="font-display text-2xl font-semibold text-ink">Como funciona</h2>
@@ -149,14 +150,43 @@ export function Landing() {
       </section>
 
       <section className="mx-auto max-w-6xl px-6 py-16">
-        <h2 className="font-display text-2xl font-semibold text-ink">Perguntas frequentes</h2>
-        <div className="mt-8 grid gap-8 md:grid-cols-2">
-          {FAQ_ITEMS.map((item) => (
-            <div key={item.question}>
-              <h3 className="font-display text-lg font-semibold text-ink">{item.question}</h3>
-              <p className="mt-2 text-sm text-ink/70">{item.answer}</p>
-            </div>
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <h2 className="font-display text-2xl font-semibold text-ink">Guias para quem contrata serviço técnico</h2>
+            <p className="mt-2 max-w-xl text-ink/70">
+              Normas, registro profissional e o que conferir antes de fechar negócio.
+            </p>
+          </div>
+          <Link to="/blog" className="text-sm font-medium text-signal-dark hover:underline">
+            Ver todos os guias
+          </Link>
+        </div>
+        <div className="mt-8 grid gap-6 md:grid-cols-3">
+          {featuredGuides.map((guide) => (
+            <article key={guide.slug} className="border-t-2 border-ink pt-4">
+              <p className="font-mono text-xs uppercase tracking-wide text-ink/40">{guide.category}</p>
+              <h3 className="mt-2 font-display text-lg font-semibold leading-snug text-ink">
+                <Link to={`/blog/${guide.slug}`} className="hover:text-blueprint">
+                  {guide.title}
+                </Link>
+              </h3>
+              <p className="mt-2 text-sm text-ink/70">{guide.description}</p>
+            </article>
           ))}
+        </div>
+      </section>
+
+      <section className="border-t-2 border-ink/10 bg-white py-16">
+        <div className="mx-auto max-w-6xl px-6">
+          <h2 className="font-display text-2xl font-semibold text-ink">Perguntas frequentes</h2>
+          <div className="mt-8 grid gap-8 md:grid-cols-2">
+            {HOME_FAQ.map((item) => (
+              <div key={item.question}>
+                <h3 className="font-display text-lg font-semibold text-ink">{item.question}</h3>
+                <p className="mt-2 text-sm text-ink/70">{item.answer}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -174,21 +204,5 @@ export function Landing() {
         </div>
       </section>
     </div>
-  );
-}
-
-function BlueprintMark() {
-  return (
-    <svg viewBox="0 0 400 320" className="hidden w-full max-w-md text-ink/15 md:block" aria-hidden="true">
-      <rect x="20" y="20" width="360" height="280" fill="none" stroke="currentColor" strokeWidth="1.5" />
-      <line x1="20" y1="90" x2="380" y2="90" stroke="currentColor" strokeWidth="1" />
-      <line x1="140" y1="90" x2="140" y2="300" stroke="currentColor" strokeWidth="1" />
-      <line x1="260" y1="20" x2="260" y2="90" stroke="currentColor" strokeWidth="1" />
-      <circle cx="80" cy="180" r="36" fill="none" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M200 260 L230 200 L260 260" fill="none" stroke="currentColor" strokeWidth="1.5" />
-      <text x="30" y="40" fontFamily="IBM Plex Mono, monospace" fontSize="11" fill="currentColor">
-        420 x 280
-      </text>
-    </svg>
   );
 }

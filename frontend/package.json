@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && node scripts/shell.mjs && (npm run prerender || echo 'Aviso: a pre-renderizacao falhou; o site segue funcionando como aplicativo normal.')",
     "preview": "vite preview",
-    "typecheck": "tsc -b --noEmit"
+    "typecheck": "tsc -b --noEmit",
+    "prerender": "vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.51.1",

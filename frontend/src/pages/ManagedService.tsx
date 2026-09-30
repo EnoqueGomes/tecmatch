@@ -6,48 +6,15 @@ import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
 import { TextArea } from '@/components/ui/TextArea';
+import { MANAGED_FAQ as FAQ_ITEMS } from '@/content/faq';
+import { META } from '@/content/meta';
+import { COMPANY } from '@/content/site';
 import { useDocumentMeta } from '@/hooks/useDocumentMeta';
-import { useJsonLd } from '@/hooks/useJsonLd';
 
-const FAQ_ITEMS = [
-  {
-    question: 'Qual a diferença entre o marketplace e o TecMatch Gerenciado?',
-    answer:
-      'No marketplace, sua empresa publica o pedido de serviço e escolhe diretamente entre as propostas recebidas de profissionais verificados. No TecMatch Gerenciado, a própria TecMatch seleciona o profissional adequado e acompanha a execução do início ao fim, com um único ponto de contato para sua empresa.',
-  },
-  {
-    question: 'Quais tipos de serviço técnico o TecMatch Gerenciado atende?',
-    answer:
-      'As mesmas áreas disponíveis no marketplace: elétrica, hidráulica, construção civil, mecânica, refrigeração e climatização, automação industrial, TI e redes, topografia, segurança do trabalho, projetos estruturais e manutenção industrial.',
-  },
-  {
-    question: 'Como começa o atendimento do TecMatch Gerenciado?',
-    answer:
-      'A empresa interessada preenche o formulário de contato descrevendo o projeto. A equipe da TecMatch analisa a necessidade, seleciona um profissional com registro verificado no Crea dentro da rede, e retorna com uma proposta de atendimento.',
-  },
-  {
-    question: 'Os profissionais do TecMatch Gerenciado são verificados?',
-    answer:
-      'Sim. Todo profissional que atende pelo TecMatch Gerenciado passa pela mesma verificação de registro no Crea usada no marketplace, conferida pela equipe da TecMatch antes de qualquer atendimento.',
-  },
-];
 
 export function ManagedService() {
-  useDocumentMeta({
-    title: 'TecMatch Gerenciado — contrate a TecMatch diretamente',
-    description:
-      'Sua empresa contrata a TecMatch, e a TecMatch seleciona e acompanha o profissional técnico certo para o projeto, do início ao fim.',
-  });
+  useDocumentMeta(META.managed);
 
-  useJsonLd({
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: FAQ_ITEMS.map((item) => ({
-      '@type': 'Question',
-      name: item.question,
-      acceptedAnswer: { '@type': 'Answer', text: item.answer },
-    })),
-  });
 
   const [form, setForm] = useState({
     companyName: '',
@@ -102,7 +69,7 @@ export function ManagedService() {
             {
               title: 'A TecMatch seleciona o profissional',
               description:
-                'Nossa equipe analisa a necessidade e escolhe um profissional com registro verificado no Crea dentro da rede.',
+                'Nossa equipe analisa a necessidade e escolhe um profissional com registro profissional conferido (Crea ou CRT) dentro da rede.',
             },
             {
               title: 'Acompanhamento até a entrega',
@@ -142,6 +109,14 @@ export function ManagedService() {
       <section className="mt-14" id="contato">
         <h2 className="font-display text-2xl font-semibold text-ink">Fale com a TecMatch</h2>
         <p className="mt-2 text-ink/60">Conte um pouco sobre o projeto — nossa equipe entra em contato em seguida.</p>
+        <a
+          href={`https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent('Olá! Tenho interesse no TecMatch Gerenciado.')}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 inline-flex items-center rounded border-2 border-moss px-4 py-2 text-sm font-medium text-moss transition-colors hover:bg-moss hover:text-paper"
+        >
+          Prefere falar agora? Chame no WhatsApp
+        </a>
 
         {mutation.isSuccess ? (
           <Card className="mt-6 border-moss/30 bg-moss/5">

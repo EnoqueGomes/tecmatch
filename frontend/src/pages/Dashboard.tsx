@@ -201,7 +201,7 @@ function ProfileEditCard({ userId, profile }: { userId: string; profile: Profess
         </div>
       ) : profile.creaNumber ? (
         <p className="mt-3 text-sm text-signal-dark">
-          Registro Crea enviado — aguardando verificação da nossa equipe.
+          Registro profissional enviado — aguardando verificação da nossa equipe.
         </p>
       ) : null}
 
@@ -228,9 +228,9 @@ function ProfileEditCard({ userId, profile }: { userId: string; profile: Profess
           onChange={(e) => setHourlyRate(e.target.value)}
         />
         <Input
-          label="Número de registro no Crea"
+          label="Registro profissional (Crea ou CRT)"
           placeholder="Ex: 123456789-PR"
-          hint="Usado só pra conferir seu registro — não altera enquanto estiver em análise."
+          hint="Engenheiros informam o Crea; técnicos industriais, o CRT. Usado apenas para conferir seu registro."
           value={creaNumber}
           onChange={(e) => setCreaNumber(e.target.value)}
         />
