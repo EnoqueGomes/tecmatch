@@ -10,6 +10,7 @@ import authRoutes from './modules/auth/auth.routes';
 import billingRoutes from './modules/billing/billing.routes';
 import { webhookController } from './modules/billing/billing.controller';
 import categoryRoutes from './modules/categories/category.routes';
+import diagnosticRoutes from './modules/diagnostics/diagnostic.routes';
 import leadRoutes from './modules/leads/lead.routes';
 import messageRoutes from './modules/messages/message.routes';
 import professionalRoutes from './modules/professionals/professional.routes';
@@ -45,6 +46,7 @@ app.use('/api/professionals', professionalRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/billing', billingRoutes);
 app.use('/api/leads', leadRoutes);
+app.use('/api/diagnostics', diagnosticRoutes);
 app.use('/api/assistant', assistantRoutes);
 
 // Rotas aninhadas sob um pedido de serviço específico — montadas antes da

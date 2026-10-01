@@ -16,6 +16,11 @@ export const META = {
     description:
       'Guias práticos sobre NR-12, PMOC, ART, TRT e registro profissional: o que conferir antes de contratar um serviço técnico ou de engenharia.',
   },
+  diagnostic: {
+    title: 'Autodiagnóstico de segurança para unidades de grãos',
+    description:
+      'Responda 20 perguntas e veja seu nível de adequação em poeira combustível, NR-12, NR-33 e NR-35. Gratuito, para silos, armazéns, cooperativas e terminais.',
+  },
   privacy: {
     title: 'Política de Privacidade',
     description: 'Como a TecMatch coleta, usa e protege os dados pessoais de clientes e profissionais.',

@@ -7,6 +7,7 @@ import { Navbar } from './components/layout/Navbar';
 import { ProtectedRoute } from './components/layout/ProtectedRoute';
 import { CreateServiceRequest } from './pages/CreateServiceRequest';
 import { Dashboard } from './pages/Dashboard';
+import { Diagnostic } from './pages/Diagnostic';
 import { GuideArticle } from './pages/GuideArticle';
 import { Guides } from './pages/Guides';
 import { Landing } from './pages/Landing';
@@ -40,6 +41,7 @@ export default function App() {
           <Route path="/registro" element={<Register />} />
           <Route path="/buscar" element={<SearchProfessionals />} />
           <Route path="/servico-gerenciado" element={<ManagedService />} />
+          <Route path="/diagnostico-seguranca-silos" element={<Diagnostic />} />
           <Route path="/blog" element={<Guides />} />
           <Route path="/blog/:slug" element={<GuideArticle />} />
           <Route path="/privacidade" element={<Privacy />} />

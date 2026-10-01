@@ -183,3 +183,25 @@ model ManagedServiceLead {
 
   @@map("managed_service_leads")
 }
+
+// Contatos gerados pelo autodiagnóstico de segurança em unidades de grãos.
+// As respostas ficam guardadas para a equipe entender o contexto antes de ligar.
+model DiagnosticSubmission {
+  id           String   @id @default(uuid())
+  companyName  String   @map("company_name")
+  contactName  String   @map("contact_name")
+  role         String?
+  email        String
+  phone        String
+  city         String
+  unitType     String   @map("unit_type")
+  score        Int
+  level        String
+  criticalGaps Int      @map("critical_gaps")
+  answers      Json
+  consentAt    DateTime @default(now()) @map("consent_at")
+  status       String   @default("NOVO")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  @@map("diagnostic_submissions")
+}

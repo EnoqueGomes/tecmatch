@@ -1,6 +1,6 @@
 // Tabela das páginas públicas que viram HTML estático no build. Cada uma leva
 // título, descrição, endereço oficial e dados estruturados próprios.
-import { HOME_FAQ, MANAGED_FAQ } from './content/faq';
+import { DIAGNOSTIC_FAQ, HOME_FAQ, MANAGED_FAQ } from './content/faq';
 import { GUIDES } from './content/guides';
 import { META } from './content/meta';
 import { COMPANY, LAST_UPDATE, SITE_URL } from './content/site';
@@ -82,6 +82,22 @@ export function getSeoPages(): SeoPage[] {
         breadcrumbs([
           { name: 'Início', path: '/' },
           { name: 'TecMatch Gerenciado', path: '/servico-gerenciado' },
+        ]),
+      ],
+    },
+    {
+      path: '/diagnostico-seguranca-silos',
+      file: 'diagnostico-seguranca-silos.html',
+      title: formatTitle(META.diagnostic.title),
+      description: META.diagnostic.description,
+      ogType: 'website',
+      lastmod: LAST_UPDATE,
+      inSitemap: true,
+      jsonLd: [
+        faqPage(DIAGNOSTIC_FAQ),
+        breadcrumbs([
+          { name: 'Início', path: '/' },
+          { name: 'Autodiagnóstico para unidades de grãos', path: '/diagnostico-seguranca-silos' },
         ]),
       ],
     },

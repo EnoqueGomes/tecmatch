@@ -1,6 +1,20 @@
-import { ArrowRight, BadgeCheck, CheckCircle2, FileText, MapPin, Search, ShieldCheck } from 'lucide-react';
+import {
+  ArrowRight,
+  ArrowUpFromLine,
+  BadgeCheck,
+  CheckCircle2,
+  Cog,
+  FileText,
+  Flame,
+  MapPin,
+  Search,
+  ShieldCheck,
+  Warehouse,
+  Wheat,
+} from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/Button';
+import { LinkedInCallout } from '@/components/ui/LinkedInCallout';
 import { CATEGORIES } from '@/content/categories';
 import { HOME_FAQ } from '@/content/faq';
 import { GUIDES } from '@/content/guides';
@@ -28,6 +42,33 @@ const TRUST = [
   { icon: MapPin, text: 'Curitiba e todo o Paraná' },
 ];
 
+const AGRO_TOPICS = [
+  {
+    slug: 'atmosfera-explosiva-poeira-combustivel-graos',
+    icon: Flame,
+    title: 'Poeira combustível',
+    description: 'Classificação de áreas (zonas 20, 21 e 22), limpeza e controle de ignição.',
+  },
+  {
+    slug: 'nr-12-elevadores-transportadores-rosca-varredora',
+    icon: Cog,
+    title: 'NR-12 em máquinas de grãos',
+    description: 'Sensores em elevadores, proteção de partes móveis e rosca varredora.',
+  },
+  {
+    slug: 'nr-33-silos-moegas-engolfamento-soterramento',
+    icon: Warehouse,
+    title: 'NR-33: silos e moegas',
+    description: 'Engolfamento, soterramento, PET e plano de resgate.',
+  },
+  {
+    slug: 'nr-35-trabalho-em-altura-silos-torres-moegas',
+    icon: ArrowUpFromLine,
+    title: 'NR-35: trabalho em altura',
+    description: 'Ancoragem permanente, monotrilho e resgate.',
+  },
+];
+
 const VERIFICATION_STEPS = [
   { icon: FileText, text: 'O profissional informa o número do registro no Crea (engenheiros) ou no CRT (técnicos).' },
   { icon: Search, text: 'Nossa equipe confere o número na consulta pública do conselho.' },
@@ -36,7 +77,7 @@ const VERIFICATION_STEPS = [
 
 export function Landing() {
   useDocumentMeta(META.home);
-  const featuredGuides = GUIDES.slice(0, 3);
+  const featuredGuides = GUIDES.filter((guide) => guide.sector !== 'agro').slice(0, 3);
 
   return (
     <div>
@@ -92,6 +133,49 @@ export function Landing() {
               Perfis sem selo ainda não tiveram o registro conferido.
             </p>
           </aside>
+        </div>
+      </section>
+
+      <section className="bg-ink py-16" aria-labelledby="agro-title">
+        <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-5">
+          <div className="md:col-span-2">
+            <span className="inline-flex items-center gap-2 rounded border-2 border-signal/50 px-3 py-1 text-sm font-medium text-signal">
+              <Wheat size={16} aria-hidden="true" />
+              Agroindústria
+            </span>
+            <h2 id="agro-title" className="mt-4 font-display text-3xl font-semibold leading-tight text-paper">
+              Segurança em unidades de grãos, do silo à expedição
+            </h2>
+            <p className="mt-4 text-paper/70">
+              Poeira combustível, máquinas, espaços confinados e trabalho em altura concentram os riscos mais graves da
+              armazenagem. A TecMatch conecta cooperativas, cerealistas, indústrias e terminais a profissionais habilitados.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link to="/diagnostico-seguranca-silos">
+                <Button>Autodiagnóstico gratuito</Button>
+              </Link>
+              <Link
+                to="/blog/seguranca-em-unidades-armazenadoras-de-graos"
+                className="inline-flex items-center rounded border-2 border-paper/40 px-5 py-2.5 text-sm font-medium text-paper transition-colors hover:bg-paper hover:text-ink"
+              >
+                Ler o guia completo
+              </Link>
+            </div>
+          </div>
+          <ul className="grid gap-4 sm:grid-cols-2 md:col-span-3">
+            {AGRO_TOPICS.map(({ slug, icon: Icon, title, description }) => (
+              <li key={slug}>
+                <Link
+                  to={`/blog/${slug}`}
+                  className="block h-full rounded border-2 border-paper/15 bg-paper/5 p-5 transition-colors hover:border-signal"
+                >
+                  <Icon size={22} className="text-signal" aria-hidden="true" />
+                  <h3 className="mt-3 font-display text-lg font-semibold text-paper">{title}</h3>
+                  <p className="mt-1 text-sm text-paper/70">{description}</p>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -174,6 +258,7 @@ export function Landing() {
             </article>
           ))}
         </div>
+        <LinkedInCallout className="mt-10" />
       </section>
 
       <section className="border-t-2 border-ink/10 bg-white py-16">

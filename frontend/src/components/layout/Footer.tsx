@@ -1,3 +1,4 @@
+import { Linkedin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { GUIDES } from '@/content/guides';
 import { COMPANY } from '@/content/site';
@@ -5,6 +6,8 @@ import { COMPANY } from '@/content/site';
 const LINK = 'text-ink/60 hover:text-ink';
 
 export function Footer() {
+  const agroGuides = GUIDES.filter((guide) => guide.sector === 'agro');
+
   return (
     <footer className="border-t-2 border-ink/10 py-12">
       <div className="mx-auto grid max-w-6xl gap-8 px-6 text-sm md:grid-cols-3">
@@ -32,6 +35,17 @@ export function Footer() {
                 {COMPANY.email}
               </a>
             )}
+            {COMPANY.linkedin && (
+              <a
+                href={COMPANY.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-1 inline-flex items-center gap-1.5 font-medium text-blueprint hover:underline"
+              >
+                <Linkedin size={14} aria-hidden="true" />
+                LinkedIn da TecMatch
+              </a>
+            )}
           </address>
         </div>
         <nav aria-label="Serviços" className="flex flex-col gap-2">
@@ -42,19 +56,23 @@ export function Footer() {
           <Link to="/servico-gerenciado" className={LINK}>
             TecMatch Gerenciado
           </Link>
+          <Link to="/diagnostico-seguranca-silos" className={LINK}>
+            Autodiagnóstico para unidades de grãos
+          </Link>
           <Link to="/registro" className={LINK}>
             Cadastro de profissionais
           </Link>
         </nav>
-        <nav aria-label="Guias técnicos" className="flex flex-col gap-2">
-          <Link to="/blog" className="font-medium text-ink hover:text-blueprint">
-            Guias técnicos
-          </Link>
-          {GUIDES.map((guide) => (
+        <nav aria-label="Agroindústria" className="flex flex-col gap-2">
+          <p className="font-medium text-ink">Agroindústria e grãos</p>
+          {agroGuides.map((guide) => (
             <Link key={guide.slug} to={`/blog/${guide.slug}`} className={LINK}>
               {guide.title}
             </Link>
           ))}
+          <Link to="/blog" className="font-medium text-ink hover:text-blueprint">
+            Todos os guias técnicos
+          </Link>
         </nav>
       </div>
       <div className="mx-auto mt-10 flex max-w-6xl flex-wrap items-center justify-between gap-2 border-t border-ink/10 px-6 pt-6 text-xs text-ink/50">

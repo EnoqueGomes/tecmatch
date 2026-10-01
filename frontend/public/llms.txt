@@ -2,7 +2,7 @@
 
 > Marketplace que conecta empresas e pessoas a engenheiros e técnicos com registro profissional conferido (Crea ou CRT), em Curitiba e no Paraná, Brasil.
 
-A TecMatch (TecMatch Serviços de Engenharia) atua em duas frentes:
+A TecMatch (TecMatch Serviços de Engenharia Ltda) atua em duas frentes:
 
 1. Marketplace: o cliente publica gratuitamente um pedido de serviço, recebe propostas de profissionais e escolhe com quem fechar. Áreas: elétrica, hidráulica, construção civil, mecânica, refrigeração e climatização, automação industrial, TI e redes, topografia, segurança do trabalho, projetos estruturais e manutenção industrial.
 2. TecMatch Gerenciado: a empresa contrata a TecMatch diretamente, e a TecMatch seleciona e acompanha o profissional técnico certo para o projeto, do início à entrega, com um único ponto de contato.
@@ -13,15 +13,21 @@ Verificação: cada profissional informa o número do registro no conselho da su
 
 - [TecMatch | Engenheiros e técnicos verificados em Curitiba](https://www.tecmatch.com.br/): Receba propostas de engenheiros e técnicos com registro conferido (Crea ou CRT) em Curitiba e no Paraná — ou deixe a TecMatch cuidar da equipe.
 - [TecMatch Gerenciado: contrate a TecMatch diretamente](https://www.tecmatch.com.br/servico-gerenciado): Sua empresa contrata a TecMatch, e a TecMatch seleciona e acompanha o profissional técnico certo para o projeto, do início à entrega.
+- [Autodiagnóstico de segurança para unidades de grãos | TecMatch](https://www.tecmatch.com.br/diagnostico-seguranca-silos): Responda 20 perguntas e veja seu nível de adequação em poeira combustível, NR-12, NR-33 e NR-35. Gratuito, para silos, armazéns, cooperativas e terminais.
 - [Guias técnicos para contratar serviços de engenharia | TecMatch](https://www.tecmatch.com.br/blog): Guias práticos sobre NR-12, PMOC, ART, TRT e registro profissional: o que conferir antes de contratar um serviço técnico ou de engenharia.
 
 ## Guias técnicos
 
-- [Como contratar um engenheiro ou técnico: checklist antes de fechar | TecMatch](https://www.tecmatch.com.br/blog/como-contratar-engenheiro-ou-tecnico-checklist): Passo a passo para contratar serviços técnicos e de engenharia com segurança: registro, ART ou TRT, escopo, contrato, prazos e forma de pagamento.
-- [Como verificar o registro de um engenheiro ou técnico (Crea e CRT) | TecMatch](https://www.tecmatch.com.br/blog/como-verificar-registro-crea-crt): Engenheiros se registram no Crea e técnicos industriais no CRT. Veja como consultar o registro de um profissional e o que observar antes de fechar o serviço.
-- [ART e TRT: o documento que você deve exigir antes de contratar | TecMatch](https://www.tecmatch.com.br/blog/art-e-trt-responsabilidade-tecnica): Saiba o que são a ART e a TRT, qual profissional emite cada uma e por que exigir esse documento protege quem contrata serviços de engenharia e técnicos.
-- [NR-12: o que é e quando sua empresa precisa adequar máquinas | TecMatch](https://www.tecmatch.com.br/blog/nr-12-adequacao-de-maquinas): Entenda o que a NR-12 exige de máquinas e equipamentos, quando a adequação é necessária e como organizar o processo com um profissional habilitado.
-- [PMOC do ar-condicionado: quem precisa ter e como contratar | TecMatch](https://www.tecmatch.com.br/blog/pmoc-plano-manutencao-ar-condicionado): Entenda o que é o PMOC, quais edifícios devem ter o plano de manutenção do ar-condicionado segundo a Lei 13.589/2018 e quem pode elaborá-lo.
+- [Segurança em unidades de grãos: normas e riscos prioritários](https://www.tecmatch.com.br/blog/seguranca-em-unidades-armazenadoras-de-graos): Poeira combustível, máquinas, espaços confinados e altura: veja como NR-1, NR-12, NR-33, NR-35 e a NPT 27 se conectam em silos, moegas e armazéns de grãos.
+- [Atmosfera explosiva por poeira combustível em unidades de grãos](https://www.tecmatch.com.br/blog/atmosfera-explosiva-poeira-combustivel-graos): Entenda como a poeira de grãos vira risco de explosão, o que é a classificação de áreas (zonas 20, 21 e 22) e o que a fiscalização orienta sobre limpeza e controle.
+- [NR-12 em unidades de grãos: elevadores, correias e rosca varredora](https://www.tecmatch.com.br/blog/nr-12-elevadores-transportadores-rosca-varredora): O que a SRTE-PR orienta sobre sensores em elevadores de canecas e transportadores, proteção de partes móveis e o risco da rosca varredora em silos.
+- [NR-33 em silos e moegas: engolfamento, soterramento e resgate](https://www.tecmatch.com.br/blog/nr-33-silos-moegas-engolfamento-soterramento): Como prevenir engolfamento e soterramento em silos, graneleiros e moegas: ancoragem horizontal, PET, bloqueio, plano de resgate e documentação mínima.
+- [NR-35 em silos, torres e moegas: trabalho em altura na armazenagem](https://www.tecmatch.com.br/blog/nr-35-trabalho-em-altura-silos-torres-moegas): O que a NR-35 exige nas atividades em altura das unidades de grãos: análise de risco, capacitação, ancoragem permanente, monotrilho em silos e resgate.
+- [Como contratar um engenheiro ou técnico: checklist antes de fechar](https://www.tecmatch.com.br/blog/como-contratar-engenheiro-ou-tecnico-checklist): Passo a passo para contratar serviços técnicos e de engenharia com segurança: registro, ART ou TRT, escopo, contrato, prazos e forma de pagamento.
+- [Como verificar o registro de um engenheiro ou técnico (Crea e CRT)](https://www.tecmatch.com.br/blog/como-verificar-registro-crea-crt): Engenheiros se registram no Crea e técnicos industriais no CRT. Veja como consultar o registro de um profissional e o que observar antes de fechar o serviço.
+- [ART e TRT: o documento que você deve exigir antes de contratar](https://www.tecmatch.com.br/blog/art-e-trt-responsabilidade-tecnica): Saiba o que são a ART e a TRT, qual profissional emite cada uma e por que exigir esse documento protege quem contrata serviços de engenharia e técnicos.
+- [NR-12: o que é e quando sua empresa precisa adequar máquinas](https://www.tecmatch.com.br/blog/nr-12-adequacao-de-maquinas): Entenda o que a NR-12 exige de máquinas e equipamentos, quando a adequação é necessária e como organizar o processo com um profissional habilitado.
+- [PMOC do ar-condicionado: quem precisa ter e como contratar](https://www.tecmatch.com.br/blog/pmoc-plano-manutencao-ar-condicionado): Entenda o que é o PMOC, quais edifícios devem ter o plano de manutenção do ar-condicionado segundo a Lei 13.589/2018 e quem pode elaborá-lo.
 
 ## Contato
 

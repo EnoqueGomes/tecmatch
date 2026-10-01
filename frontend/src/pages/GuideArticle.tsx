@@ -1,7 +1,9 @@
 import { Link, useParams } from 'react-router-dom';
 import { Button } from '@/components/ui/Button';
+import { LinkedInCallout } from '@/components/ui/LinkedInCallout';
 import { RichText } from '@/components/ui/RichText';
 import { findGuide, GUIDES } from '@/content/guides';
+import { COMPANY } from '@/content/site';
 import { useDocumentMeta } from '@/hooks/useDocumentMeta';
 import { formatGuideDate } from './Guides';
 import { NotFound } from './NotFound';
@@ -28,7 +30,11 @@ export function GuideArticle() {
 
   if (!guide) return <NotFound />;
 
-  const others = GUIDES.filter((item) => item.slug !== guide.slug);
+  // "Leia também": até 4 guias, dando preferência aos do mesmo setor.
+  const others = GUIDES.filter((item) => item.slug !== guide.slug)
+    .sort((a, b) => Number(b.sector === guide.sector) - Number(a.sector === guide.sector))
+    .slice(0, 4);
+  const reviewer = COMPANY.reviewer;
 
   return (
     <article className="mx-auto max-w-3xl px-6 py-16">
@@ -47,6 +53,10 @@ export function GuideArticle() {
       <p className="mt-4 text-sm text-ink/50">
         Por Equipe TecMatch · Publicado em {formatGuideDate(guide.publishedAt)}
         {guide.updatedAt !== guide.publishedAt && ` · Atualizado em ${formatGuideDate(guide.updatedAt)}`}
+        {reviewer.name &&
+          ` · Revisão técnica: ${reviewer.name}${reviewer.role ? `, ${reviewer.role}` : ''}${
+            reviewer.registration ? ` (${reviewer.registration})` : ''
+          }`}
       </p>
 
       {guide.sections.length > 3 && (
@@ -113,6 +123,8 @@ export function GuideArticle() {
           <Button>{guide.cta.label}</Button>
         </Link>
       </div>
+
+      <LinkedInCallout className="mt-6" />
 
       {others.length > 0 && (
         <aside className="mt-14">

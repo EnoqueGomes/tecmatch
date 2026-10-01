@@ -7,6 +7,7 @@ const PUBLIC_LINKS = [
   { to: '/buscar', label: 'Buscar profissionais' },
   { to: '/servico-gerenciado', label: 'TecMatch Gerenciado' },
   { to: '/blog', label: 'Guias' },
+  { to: '/diagnostico-seguranca-silos', label: 'Diagnóstico grátis' },
 ];
 
 const LINK = 'whitespace-nowrap text-sm font-medium text-ink hover:text-blueprint';

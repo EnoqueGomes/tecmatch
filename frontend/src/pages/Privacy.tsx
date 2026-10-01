@@ -2,9 +2,9 @@ import { COMPANY } from '@/content/site';
 import { META } from '@/content/meta';
 import { useDocumentMeta } from '@/hooks/useDocumentMeta';
 
-// Atualizada em 30/09/2026. Se o atendimento do site passar a usar IA
+// Atualizada em 01/10/2026. Se o atendimento do site passar a usar IA
 // (ANTHROPIC_API_KEY no Render), revise a seção "Atendimento pelo site".
-const UPDATED = '30 de setembro de 2026';
+const UPDATED = '1º de outubro de 2026';
 
 const SECTIONS: { heading: string; paragraphs?: string[]; list?: string[] }[] = [
   {
@@ -20,6 +20,7 @@ const SECTIONS: { heading: string; paragraphs?: string[]; list?: string[] }[] = 
       'Profissionais: áreas de atuação, descrição do perfil, valor por hora e número do registro profissional (Crea ou CRT), usado para a verificação.',
       'Uso da plataforma: pedidos de serviço, propostas, mensagens trocadas entre cliente e profissional e avaliações.',
       'Formulário do TecMatch Gerenciado: nome da empresa, nome do contato, e-mail, telefone e descrição do que a empresa precisa.',
+      'Autodiagnóstico de segurança para unidades de grãos: nome, cargo (opcional), empresa, e-mail, telefone, cidade, tipo de unidade e as respostas ao questionário, com o resultado calculado.',
       'Dados técnicos de acesso, como endereço IP e data e hora, registrados pelos servidores que hospedam o site.',
     ],
   },
@@ -36,6 +37,7 @@ const SECTIONS: { heading: string; paragraphs?: string[]; list?: string[] }[] = 
       'Conferir o registro profissional e exibir o selo de verificado.',
       'Conectar clientes e profissionais e permitir a troca de propostas e mensagens.',
       'Atender contatos feitos pelo formulário, pelo chat ou pelo WhatsApp.',
+      'Retornar o contato sobre o resultado do autodiagnóstico, com base no consentimento que você dá antes de enviá-lo.',
       'Garantir a segurança da plataforma e prevenir fraudes.',
       'Cumprir obrigações legais e regulatórias.',
     ],

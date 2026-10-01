@@ -28,6 +28,11 @@ export const HOME_FAQ = [
       'Sim — esse é o TecMatch Gerenciado: sua empresa contrata a TecMatch diretamente, e a TecMatch seleciona e acompanha o profissional técnico certo para o projeto, do início à entrega.',
   },
   {
+    question: 'A TecMatch atende o setor agroindustrial?',
+    answer:
+      'Sim. A TecMatch conecta cooperativas, cerealistas, indústrias e terminais a profissionais habilitados para segurança em unidades de grãos: estudo de classificação de áreas de poeira combustível, adequação à NR-12, NR-33 (espaços confinados) e NR-35 (trabalho em altura). Há um autodiagnóstico gratuito para começar.',
+  },
+  {
     question: 'Em quais regiões a TecMatch atua?',
     answer:
       'O foco inicial é Curitiba e o Paraná. Pedidos de outras regiões podem receber propostas conforme a disponibilidade de profissionais cadastrados.',
@@ -54,5 +59,33 @@ export const MANAGED_FAQ = [
     question: 'Os profissionais do TecMatch Gerenciado são verificados?',
     answer:
       'Sim. Todo profissional que atende pelo TecMatch Gerenciado passa pela mesma verificação de registro profissional (Crea ou CRT) usada no marketplace, conferida pela equipe da TecMatch antes de qualquer atendimento.',
+  },
+];
+
+export const DIAGNOSTIC_FAQ = [
+  {
+    question: 'Quanto tempo leva o autodiagnóstico?',
+    answer:
+      'Cerca de 5 minutos. São 20 perguntas objetivas, divididas em 5 blocos: poeira combustível e atmosfera explosiva, NR-12, NR-33, NR-35 e gestão. Ao final você informa seus dados de contato e vê o resultado.',
+  },
+  {
+    question: 'O autodiagnóstico substitui um laudo ou uma inspeção?',
+    answer:
+      'Não. É uma triagem baseada nas suas respostas. Estudos e laudos, como o de classificação de áreas, exigem avaliação no local por profissional habilitado, com ART. O resultado serve para você enxergar onde estão as lacunas e priorizar ações.',
+  },
+  {
+    question: 'Por que preciso informar meus dados para ver o resultado?',
+    answer:
+      'Para que a equipe da TecMatch possa retornar com os pontos de atenção do seu resultado e, se fizer sentido, indicar profissionais habilitados. Os dados são usados apenas para esse contato, conforme a Política de Privacidade, e você precisa autorizar o contato antes de enviar.',
+  },
+  {
+    question: 'Para quais tipos de unidade o diagnóstico serve?',
+    answer:
+      'Foi pensado para unidades de beneficiamento e armazenamento de grãos (UBAG), como cooperativas, cerealistas, indústrias e terminais. As perguntas também servem de referência para agroindústrias com poeira combustível, como fábricas de ração e moinhos.',
+  },
+  {
+    question: 'A TecMatch faz os estudos e as adequações?',
+    answer:
+      'A TecMatch conecta a empresa a profissionais habilitados, com registro no Crea ou no CRT e emissão de ART ou TRT quando aplicável, e pode acompanhar o projeto do início à entrega pelo TecMatch Gerenciado.',
   },
 ];
